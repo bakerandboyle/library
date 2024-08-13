@@ -1,5 +1,6 @@
 package com.bakerandboyle.library.infrastructure;
 
+import com.bakerandboyle.infrastructure.Fixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ class BookRepositoryTest {
     @BeforeEach
     void setUp() {
         bookRepository.deleteAll();
-        bookRepository.saveAll(books);
+        bookRepository.saveAll(Fixtures.books());
     }
 
     @Test
@@ -44,8 +45,8 @@ class BookRepositoryTest {
     void testListAll() {
         List<Book> listOfBooks = bookRepository.findAll();
 
-        assertEquals(books.size(), listOfBooks.size());
-        assertBooksEqual(books, listOfBooks);
+        assertEquals(Fixtures.books().size(), listOfBooks.size());
+        assertBooksEqual(Fixtures.books(), listOfBooks);
     }
 
     private void assertBooksEqual(List<Book> expectedBooks, List<Book> actualBooks) {
@@ -63,38 +64,4 @@ class BookRepositoryTest {
         }
 
     }
-
-    // Maybe be better placed in a fixtures class
-    private static final List<Book> books = List.of(
-            BookBuilder.newBuilder()
-            .withTitle("To Kill a Mockingbird")
-                    .withAuthor("Harper Lee")
-                    .withGenre("Fiction")
-                    .withIsbn("9780060735256")
-                    .build(),
-            BookBuilder.newBuilder()
-                    .withTitle("1984")
-                    .withAuthor("George Orwell")
-                    .withGenre("Dystopian")
-                    .withIsbn("9780451534852")
-                    .build(),
-            BookBuilder.newBuilder()
-                    .withTitle("Pride and Prejudice")
-                    .withAuthor("Jane Austen")
-                    .withGenre("Romance")
-                    .withIsbn("9780553353356")
-                    .build(),
-            BookBuilder.newBuilder()
-                    .withTitle("The Lord of the Rings")
-                    .withAuthor("J.R.R. Tolkien")
-                    .withGenre("Fantasy")
-                    .withIsbn("9780395026467")
-                    .build(),
-            BookBuilder.newBuilder()
-                    .withTitle("The Hitchhiker's Guide to the Galaxy")
-                    .withAuthor("Douglas Adams")
-                    .withGenre("Science Fiction")
-                    .withIsbn("9780575031207")
-                    .build()
-    );
 }

@@ -2,6 +2,7 @@ package com.bakerandboyle.library.infrastructure;
 
 public class BookBuilder {
 
+    private String id;
     private String title;
     private String author;
     private String genre;
@@ -9,6 +10,11 @@ public class BookBuilder {
 
     public static BookBuilder newBuilder() {
         return new BookBuilder();
+    }
+
+    public BookBuilder withId(String id) {
+        this.id = id;
+        return this;
     }
 
     public BookBuilder withTitle(String title) {
@@ -33,6 +39,9 @@ public class BookBuilder {
 
     public Book build() {
         Book book = new Book();
+        if (id != null) {
+            book.setId(Long.parseLong(id));
+        }
         book.setTitle(title);
         book.setAuthor(author);
         book.setGenre(genre);
