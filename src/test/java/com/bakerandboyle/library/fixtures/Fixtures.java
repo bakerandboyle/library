@@ -1,4 +1,4 @@
-package com.bakerandboyle.infrastructure;
+package com.bakerandboyle.library.fixtures;
 
 import com.bakerandboyle.library.infrastructure.Book;
 import com.bakerandboyle.library.infrastructure.BookBuilder;
@@ -66,5 +66,21 @@ public class Fixtures {
 
     public static BookDTO aBookDTOWithoutId() {
         return new BookDTO(null, "Test Book", "Author", "Genre", "9871444555");
+    }
+
+    public static BookDTO aBookDTO() {
+        return new BookDTO("1", "Test Book", "Author", "Genre", "9871444555");
+    }
+
+    private static final List<BookDTO> BOOK_DTOS = List.of(
+            new BookDTO("1", "To Kill a Mockingbird", "Harper Lee", "Fiction", "9780060735256"),
+            new BookDTO("2", "1984", "George Orwell", "Dystopian", "9780451534852"),
+            new BookDTO("3", "Pride and Prejudice", "Jane Austen", "Romance", "9780553353356"),
+            new BookDTO("4", "The Lord of the Rings", "J.R.R. Tolkien", "Fantasy", "9780395026467"),
+            new BookDTO("5", "The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "Science Fiction", "9780575031207")
+    );
+
+    public static List<BookDTO> bookDTOs() {
+        return BOOK_DTOS;
     }
 }

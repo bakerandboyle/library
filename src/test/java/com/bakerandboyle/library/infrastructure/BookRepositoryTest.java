@@ -1,6 +1,6 @@
 package com.bakerandboyle.library.infrastructure;
 
-import com.bakerandboyle.infrastructure.Fixtures;
+import com.bakerandboyle.library.fixtures.Fixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
+import static com.bakerandboyle.library.utils.TestUtils.assertBooksEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -47,21 +48,5 @@ class BookRepositoryTest {
 
         assertEquals(Fixtures.books().size(), listOfBooks.size());
         assertBooksEqual(Fixtures.books(), listOfBooks);
-    }
-
-    private void assertBooksEqual(List<Book> expectedBooks, List<Book> actualBooks) {
-        assertEquals(expectedBooks.size(), actualBooks.size());
-        for (int i = 0; i < expectedBooks.size(); i++) {
-            Book expectedBook = expectedBooks.get(i);
-            Book actualBook = actualBooks.get(i);
-
-            assertEquals(expectedBook.getTitle(), actualBook.getTitle());
-            assertEquals(expectedBook.getAuthor(), actualBook.getAuthor());
-            assertEquals(expectedBook.getGenre(),
-                    actualBook.getGenre());
-            assertEquals(expectedBook.getIsbn(),
-                    actualBook.getIsbn());
-        }
-
     }
 }

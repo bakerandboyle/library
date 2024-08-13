@@ -1,5 +1,6 @@
 package com.bakerandboyle.library.service;
 
+import com.bakerandboyle.library.fixtures.Fixtures;
 import com.bakerandboyle.library.infrastructure.Book;
 import com.bakerandboyle.library.model.BookDTO;
 import org.junit.jupiter.api.Test;
@@ -14,26 +15,36 @@ class BookTransformerTest {
     @Test
     void testToBookWithNullId() {
 
-        BookDTO bookDTO = new BookDTO(null, "Test Book", "Author", "Genre", "ISBN");
-        Book book = bookTransformer.toBook(bookDTO);
+        Book book = bookTransformer.toBook(Fixtures.aBookDTOWithoutId());
 
         assertNull(book.getId());
-        assertEquals("Test Book", book.getTitle());
-        assertEquals("Author", book.getAuthor());
-        assertEquals("Genre", book.getGenre());
-        assertEquals("ISBN", book.getIsbn());
+        assertEquals(Fixtures.aBookDTOWithoutId().title(), book.getTitle());
+        assertEquals(Fixtures.aBookDTOWithoutId().author(), book.getAuthor());
+        assertEquals(Fixtures.aBookDTOWithoutId().genre(), book.getGenre());
+        assertEquals(Fixtures.aBookDTOWithoutId().isbn(), book.getIsbn());
     }
 
     @Test
     void testToBookWithId() {
 
-        BookDTO bookDTO = new BookDTO("1", "Test Book", "Author", "Genre", "ISBN");
-        Book book = bookTransformer.toBook(bookDTO);
+        Book book = bookTransformer.toBook(Fixtures.aBookDTO());
 
-        assertEquals(1L, book.getId());
-        assertEquals("Test Book", book.getTitle());
-        assertEquals("Author", book.getAuthor());
-        assertEquals("Genre", book.getGenre());
-        assertEquals("ISBN", book.getIsbn());
+        assertEquals(Long.parseLong(Fixtures.aBookDTO().id()), book.getId());
+        assertEquals(Fixtures.aBookDTO().title(), book.getTitle());
+        assertEquals(Fixtures.aBookDTO().author(), book.getAuthor());
+        assertEquals(Fixtures.aBookDTO().genre(), book.getGenre());
+        assertEquals(Fixtures.aBookDTO().isbn(), book.getIsbn());
     }
+
+    @Test
+    void testToBookDTO() {
+        BookDTO bookDto = bookTransformer.toBookDTO(Fixtures.aBook());
+
+        assertEquals(String.valueOf(Fixtures.aBook().getId()), bookDto.id());
+        assertEquals(Fixtures.aBook().getTitle(), bookDto.title());
+        assertEquals(Fixtures.aBook().getAuthor(), bookDto.author());
+        assertEquals(Fixtures.aBook().getGenre(), bookDto.genre());
+        assertEquals(Fixtures.aBook().getIsbn(), bookDto.isbn());
+    }
+
 }

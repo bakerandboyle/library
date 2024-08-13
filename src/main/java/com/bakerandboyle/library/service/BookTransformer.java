@@ -16,4 +16,8 @@ public class BookTransformer {
                 .withIsbn(bookDto.isbn())
                 .build();
     }
+
+    public BookDTO toBookDTO(Book book) {
+        return new BookDTO(String.valueOf(book.getId()), book.getTitle(), book.getAuthor(), book.getGenre(), book.getIsbn());
+    }
 }

@@ -5,7 +5,9 @@ import com.bakerandboyle.library.infrastructure.BookRepository;
 import com.bakerandboyle.library.model.BookDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -25,4 +27,12 @@ public class BookService {
                 .map(bookRepository::save)
                 .orElseThrow(() -> new IllegalArgumentException("BookDTO cannot be null"));
     }
+
+    public List<BookDTO> getAllBooks() {
+        return bookRepository.findAll()
+                .stream()
+                .map(bookTransformer::toBookDTO)
+                .collect(Collectors.toList());
+    }
+
 }
