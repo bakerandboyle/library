@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class BookTransformerTest {
 
-    private BookTransformer bookTransformer = new BookTransformer();
+    private final BookTransformer bookTransformer = new BookTransformer();
 
     @Test
     void testToBookWithNullId() {
