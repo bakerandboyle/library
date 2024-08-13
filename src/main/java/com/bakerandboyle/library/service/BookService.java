@@ -3,6 +3,7 @@ package com.bakerandboyle.library.service;
 import com.bakerandboyle.library.infrastructure.Book;
 import com.bakerandboyle.library.infrastructure.BookRepository;
 import com.bakerandboyle.library.model.BookDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class BookService {
 
     private final BookTransformer bookTransformer;
 
+    @Autowired
     public BookService(BookRepository bookRepository, BookTransformer bookTransformer) {
         this.bookRepository = bookRepository;
         this.bookTransformer = bookTransformer;
